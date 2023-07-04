@@ -7,8 +7,8 @@ class StackWithMax():
         self.maximum= float('-inf')
 
     def Push(self, a):  
-        if a > self.maximum[-1]:
-            temp = 2*a - self.maximum[-1]
+        if a > self.maximum:
+            temp = 2*a - self.maximum
             self.__stack.append(temp)
             self.maximum = a
         else:
