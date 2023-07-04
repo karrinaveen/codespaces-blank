@@ -8,13 +8,14 @@ class StackWithMax():
 
     def Push(self, a):
         self.__stack.append(a)
-        new_max = max(a,self.__max[-1])
-        self.__max.append(new_max)
+        if a >= self.__max:
+            self.__max.append(a)
 
     def Pop(self):
         assert(len(self.__stack))
-        self.__stack.pop()
-        self.__max.pop()
+        x = self.__stack.pop()
+        if x == self.__max[-1]:
+            self.__max.pop()
 
     def Max_naive(self):
         assert(len(self.__stack))
