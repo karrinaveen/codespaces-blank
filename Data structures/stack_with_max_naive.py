@@ -8,7 +8,7 @@ class StackWithMax():
 
     def Push(self, a):
         self.__stack.append(a)
-        if a >= self.maximum:
+        if a >= self.maximum[-1]:
             self.maximum.append(a)
 
     def Pop(self):
