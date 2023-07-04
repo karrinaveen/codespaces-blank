@@ -4,18 +4,21 @@ import sys
 class StackWithMax():
     def __init__(self):
         self.__stack = []
-        self.maximum= [float('-inf')]
+        self.maximum= float('-inf')
 
-    def Push(self, a):
-        self.__stack.append(a)
-        if a >= self.maximum[-1]:
-            self.maximum.append(a)
+    def Push(self, a):  
+        if a > self.maximum[-1]:
+            temp = 2*a - self.maximum[-1]
+            self.__stack.append(temp)
+            self.maximum = a
+        else:
+            self.__stack.append(a)
 
     def Pop(self):
         assert(len(self.__stack))
         x = self.__stack.pop()
-        if x == self.maximum[-1]:
-            self.maximum.pop()
+        if x > self.maximum:
+            self.maximum = 2*self.maximum - x
 
     def Max_naive(self):
         assert(len(self.__stack))
@@ -23,7 +26,7 @@ class StackWithMax():
 
     def Max(self):
         assert(len(self.__stack))
-        return self.maximum[-1]
+        return self.maximum 
 
 
 if __name__ == '__main__':
