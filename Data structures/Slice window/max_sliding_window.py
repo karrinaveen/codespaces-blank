@@ -7,7 +7,7 @@ def max_sliding_window(sequence, m):
     max_nums = []
     length = len(sequence)
     for i in range(length):
-        print(dq)
+        # print(dq)
         while dq and sequence[i] >= sequence[dq[-1]]:
             dq.pop()
         dq.append(i)
