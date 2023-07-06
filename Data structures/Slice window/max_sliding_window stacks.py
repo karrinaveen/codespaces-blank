@@ -41,7 +41,7 @@ class QueueWithStack():
     def enqueue(self,a):
         self.inbox.Push(a)
 
-    def dequeue(self,a):
+    def dequeue(self):
         if len(self.outbox)==0:
             while(len(self.inbox)):
                 temp = self.inbox.Pop()
@@ -60,7 +60,7 @@ def max_sliding_window(sequence, m):
     for x in range(l):
         dq.enqueue(sequence[x])
         if (x>=m):
-            dq.dequeue(sequence[x-m+1])
+            dq.dequeue()
         if (x>=m-1):
             max_nums.append(dq.Max())
     return max_nums
