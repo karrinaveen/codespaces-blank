@@ -17,7 +17,7 @@ def max_sliding_window_approach3(sequence,m):
         right_ele = sequence[i]
         newslider = deque()
         for ele in slider:
-            if ele > right_ele:
+            if ele >= right_ele:
                 newslider.append(ele)
         if len(newslider)==0 or newslider[0]!=left_ele:
             newslider.appendleft(left_ele)
