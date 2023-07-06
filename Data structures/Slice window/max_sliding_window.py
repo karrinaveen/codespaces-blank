@@ -12,19 +12,17 @@ def max_sliding_window_approach3(sequence,m):
 
     for i in range(m,len(sequence)):
         slider.popleft()
+        left_ele = sequence[i-m+1]
         right_ele = sequence[i]
-        left_ele = slider[0]
-        if right_ele >=maximums[-1]:
-            slider = deque([slider[0],right_ele])
-            maximums.append(right_ele)
-        else:
-            new_slider = deque([left_ele])
-            for ele in itertools.islice(slider,1,len(slider)):
-                if ele>sequence[i]:
-                    new_slider.append(ele)
-            new_slider.append(right_ele)
-            slider = new_slider.copy()
-            maximums.append(max(slider))
+        newslider = deque()
+        for ele in slider:
+            if ele > right_ele:
+                newslider.append(ele)
+        if len(newslider)==0 or newslider[-1]!=left_ele:
+            newslider.append(left_ele)
+        newslider.append(right_ele)
+        slider = newslider.copy()
+        maximums.append(max(slider))
     return maximums
 
 
