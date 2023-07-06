@@ -3,35 +3,26 @@
 class StackWithMax():
     def __init__(self):
         self.__stack = []
-        self.maximum= None
+        self.max_value = [float('-inf')]
     
     def __len__(self):
         return len(self.__stack)
 
     def Push(self, a):
-        if len(self)==0: self.maximum =a
-        if a > self.maximum:
-            temp = 2*a - self.maximum
-            self.__stack.append(temp)
-            self.maximum = a
-        else:
-            self.__stack.append(a)
+        if not self.max_value:
+            self.max_value.append(a)
+        elif a >= self.max_value[-1]:
+            self.max_value.append(a)
+        self.__stack.append(a)
 
     def Pop(self):
         assert(len(self.__stack))
-        x = self.__stack.pop()
-        if x > self.maximum:
-            self.maximum = 2*self.maximum - x
-        return x
-
-    def Max_naive(self):
-        assert(len(self.__stack))
-        return max(self.__stack)
+        if self.__stack[-1] == self.max_value[-1]:
+            self.max_value.pop()
+        return self.__stack.pop()
 
     def Max(self):
-        if len(self.__stack)==0: 
-            return float('-inf')
-        return self.maximum 
+        return self.max_value[-1] 
     
 class QueueWithStack():
     def __init__(self):
@@ -49,6 +40,10 @@ class QueueWithStack():
         self.outbox.Pop()
     
     def Max(self):
+        # if self.inbox.Max() == []:
+        #     return max(self.outbox.Max())
+        # if self.outbox.Max() == []:
+        #     return max(self.inbox.Max())
         return max(self.inbox.Max(),self.outbox.Max())
     
 
@@ -62,6 +57,8 @@ def max_sliding_window(sequence, m):
         if (x>=m):
             dq.dequeue()
         if (x>=m-1):
+            # print(dq.inbox.Max())
+            # print(dq.outbox.Max())
             max_nums.append(dq.Max())
     return max_nums
 
