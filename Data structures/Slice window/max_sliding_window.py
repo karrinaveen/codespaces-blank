@@ -2,6 +2,21 @@
 from collections import deque
 import itertools
 
+def max_sliding_window(sequence, m):
+    dq = deque()
+    max_nums = []
+    length = len(sequence)
+    for i in range(length):
+        print(dq)
+        while dq and sequence[i] >= sequence[dq[-1]]:
+            dq.pop()
+        dq.append(i)
+        if i >= m and dq and dq[0] == i - m:
+            dq.popleft()
+        if i >= m - 1:
+            max_nums.append(sequence[dq[0]])
+    return max_nums
+
 def max_sliding_window_approach3(sequence,m):
     #using double ended queues
     if m==1: 
@@ -11,7 +26,7 @@ def max_sliding_window_approach3(sequence,m):
     maximums = [max(slider)]
 
     for i in range(m,len(sequence)):
-        # print(slider)
+        print(slider)
         slider.popleft()
         left_ele = sequence[i-m+1]
         right_ele = sequence[i]
@@ -44,5 +59,5 @@ if __name__ == '__main__':
     assert len(input_sequence) == n
     window_size = int(input())
 
-    print(*max_sliding_window_approach3(input_sequence, window_size))
+    print(*max_sliding_window(input_sequence, window_size))
 
