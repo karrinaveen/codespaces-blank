@@ -27,27 +27,15 @@ def max_sliding_window(sequence, m):
     for i in range(0,l,m):
         start = i
         end = min(i+m,l)
-        # print(sequence[start:end])
         suffix_blocks.append(Block(sequence[start:end]))
         prefix_blocks.append(Block(sequence[start:end][::-1]))
 
     pblock = sblock = 0
     pele = sele = m-1
 
-    # for blocks in suffix_blocks:
-    #     print(blocks.items)
-    
-    # for blocks in prefix_blocks:
-    #     print(blocks.items)
-
-    # return
-
     for j in range(l-m+1):
         prefix = prefix_blocks[pblock].max[pele]
         suffix = suffix_blocks[sblock].max[sele]
-
-        # print(prefix_blocks[pblock].max)
-        # print(suffix_blocks[sblock].max)
 
         max_nums.append(max(prefix,suffix))
 
